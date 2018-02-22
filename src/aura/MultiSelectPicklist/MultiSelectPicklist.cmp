@@ -7,7 +7,7 @@
     <aura:attribute name="fieldAPINameList" type="String[]"/>
     <aura:attribute name="fieldAPIName" type="String" />
     <aura:attribute name="objectAPIName" type="String" />
-    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="recordId" type="String" required="true" default=""/>
     <aura:attribute name="theRecord" type="Object" />
     <aura:attribute name="simpleRecord" type="Object" />
 

@@ -25,21 +25,23 @@
             optionsList = selectedOptions.join(';');
         }
         var theRecord = component.get("v.simpleRecord");
-        theRecord[fieldAPIName] = optionsList;
-        component.set("v.simpleRecord", theRecord);
-        component.find("theRecordData").saveRecord(function (saveResult) {
-            if (saveResult.state === "SUCCESS" || saveResult.state === "DRAFT") {
-                // record is saved successfully
-                console.log('saved successfully');
-            } else if (saveResult.state === "INCOMPLETE") {
-                // handle the incomplete state
-                console.log("User is offline, device doesn't support drafts.");
-            } else if (saveResult.state === "ERROR") {
-                // handle the error state
-                console.log('Problem saving Record, error: ' + JSON.stringify(saveResult.error));
-            } else {
-                console.log('Unknown problem, state: ' + saveResult.state + ', error: ' + JSON.stringify(saveResult.error));
-            }
-        });
+        if(theRecord && fieldAPIName) {
+            theRecord[fieldAPIName] = optionsList;
+            component.set("v.simpleRecord", theRecord);
+            component.find("theRecordData").saveRecord(function (saveResult) {
+                if (saveResult.state === "SUCCESS" || saveResult.state === "DRAFT") {
+                    // record is saved successfully
+                    console.log('saved successfully');
+                } else if (saveResult.state === "INCOMPLETE") {
+                    // handle the incomplete state
+                    console.log("User is offline, device doesn't support drafts.");
+                } else if (saveResult.state === "ERROR") {
+                    // handle the error state
+                    console.log('Problem saving Record, error: ' + JSON.stringify(saveResult.error));
+                } else {
+                    console.log('Unknown problem, state: ' + saveResult.state + ', error: ' + JSON.stringify(saveResult.error));
+                }
+            });
+        }
     },
 })
