@@ -1,0 +1,5 @@
+<design:component>
+    <design:attribute name="fieldName" label="Field Name" description="The name of the multi-select picklist." />
+    <design:attribute name="objectAPIName" label="Object API Name" description="The API name of the Object." />
+    <design:attribute name="fieldAPIName" label="Field API Name" description="The API name of the Field." />
+</design:component>

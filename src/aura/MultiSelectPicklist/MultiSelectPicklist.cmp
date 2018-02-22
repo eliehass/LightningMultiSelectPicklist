@@ -1,0 +1,34 @@
+<aura:component description="MultiSelectPicklist" implements="flexipage:availableForRecordHome,force:hasRecordId" controller="MultiSelectPicklistController">
+    <aura:attribute name="showPicklist" type="Boolean" default="false" />
+    <aura:attribute name="options" type="Object" />
+    <aura:attribute name="selectedOptions" type="Object" />
+    <aura:attribute name="editable" type="Boolean" default="true" />
+    <aura:attribute name="fieldName" type="String" />
+    <aura:attribute name="fieldAPINameList" type="String[]"/>
+    <aura:attribute name="fieldAPIName" type="String" />
+    <aura:attribute name="objectAPIName" type="String" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="theRecord" type="Object" />
+    <aura:attribute name="simpleRecord" type="Object" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <aura:if isTrue="{!v.showPicklist}">
+        <force:recordData aura:id="theRecordData"
+                          recordId="{!v.recordId}"
+                          targetRecord="{!v.theRecord}"
+                          targetFields="{!v.simpleRecord}"
+                          recordUpdated="{!c.recordHasUpdated}"
+                          fields="{!v.fieldAPINameList}"
+                          mode="EDIT" />
+        <div class="slds-m-around_x-small">
+            <lightning:dualListbox aura:id="selectOptions" name="Select Options"  label="{!'Select ' + v.fieldName}"
+                                   sourceLabel="{!'Available ' + v.fieldName}"
+                                   selectedLabel="{!'Selected ' + v.fieldName}"
+                                   options="{!v.options}"
+                                   value="{!v.selectedOptions}"
+                                   disabled="{!!v.editable}"
+                                   onchange="{!c.updateRecord}"/>
+        </div>
+    </aura:if>
+</aura:component>
